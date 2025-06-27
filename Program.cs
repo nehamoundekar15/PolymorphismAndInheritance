@@ -80,7 +80,7 @@ namespace PolymorphismAndInheritance
             Complex complex1 = new Complex(10, 20);
             Complex complex2 = new Complex(10, 20);
 
-            Complex complex3 = complex1 + complex2; // this will call the operator + method
+            Complex complex3 = complex1 + complex2; // this will call the operator + method.
             Console.WriteLine("complex3 real part = " + complex3.real + " complex3 imaginary part = " + complex3.imga);
 
 
