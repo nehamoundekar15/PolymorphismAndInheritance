@@ -30,7 +30,7 @@ namespace PolymorphismAndInheritance
         }
 
         // example - operator overloading +
-         class  Complex
+        class Complex
         {
             public double real { get; set; }
             public double imga { get; set; }
@@ -56,7 +56,7 @@ namespace PolymorphismAndInheritance
         }
         class Manager : Emp
         {
-            public override void  Name()
+            public override void Name()
             {
                 Console.WriteLine("Manager Name");
             }
@@ -79,7 +79,7 @@ namespace PolymorphismAndInheritance
             }
 
         }
-        class Chiled1: Parent1
+        class Chiled1 : Parent1
         {
             public void Disaplay1()
             {
@@ -148,7 +148,7 @@ namespace PolymorphismAndInheritance
         }
         class Child5 : partrInterface, childInterface
         {
-       
+
             public void Display()
             {
                 Console.WriteLine("Child5 Display");
@@ -159,9 +159,59 @@ namespace PolymorphismAndInheritance
                 Console.WriteLine("Child5 Display1");
             }
         }
-        
+        //protected constructor nad default 
+
+        class Base1
+        {
+            protected Base1()
+            {
+                Console.WriteLine("Base1 constructor");
+            }
+        }
+
+        class Div1 : Base1
+        {
+            public Div1()
+            {
+                Console.WriteLine("Div1 constructor");
+
+            }
+        }
+
+        //Constructor overloading - Havinh multiple constructor in the same class, with different paramenter. This will allow you to create an object in different way.
+
+        class AddClass
+        {
+            public AddClass(int a, int b)
+            {
+                Console.WriteLine($"{a + b}");
+            }
+            public AddClass(int a, int b, int c)
+            {
+                Console.WriteLine($"{a + b + c}");
+            }
+            public AddClass(int a, int b,int c, double d)
+            {
+                Console.WriteLine($"{a + b + c+ d}");
+            }
+        }
 
 
+        class Base
+        {
+            protected Base(string name)
+            {
+                Console.WriteLine("Base constructor: " + name);
+            }
+        }
+
+        class Derived : Base
+        {
+            public Derived(string name, int age, int rollNum) : base(name)
+            {
+                Console.WriteLine("Derived constructor: Age is " + age);
+            }
+        }
 
         static void Main(string[] args)
         {
@@ -179,15 +229,15 @@ namespace PolymorphismAndInheritance
             MethodOverloading methodoverloading = new MethodOverloading();
             methodoverloading.Add(1, 2);
             methodoverloading.Add(1, 2, 8.9f);
-            methodoverloading.Add(1, 2,6,7);
+            methodoverloading.Add(1, 2, 6, 7);
             Console.WriteLine("********************************************************");
 
 
             // operator overloading
             int result = 10 + 20; // this is normal addition
-            string str1 = "Hello"+ "Demo";
-            Console.WriteLine("result = "+result);
-            Console.WriteLine("str1 = "+str1);
+            string str1 = "Hello" + "Demo";
+            Console.WriteLine("result = " + result);
+            Console.WriteLine("str1 = " + str1);
 
             //some rule of operator overloading
             // operator method must be declared as public static (operator +)
@@ -239,6 +289,23 @@ namespace PolymorphismAndInheritance
             Child5 child5 = new Child5();
             child5.Display(); // this will call the interface method
             child5.Display1(); // this will call the interface method   
+
+            // Constructors role in inheritance 
+            // calls the base constructor first then child 
+            // Private constructor - cannot be inherited
+            // Protected constructor - can be inherited by the derived class
+
+            // Protected and Default constructor 
+            Div1 div1 = new Div1();
+
+            //  protected contructor and parameterized
+            Derived d = new Derived("Neha", 25, 24);
+
+
+            //Constructor overloading - Havinh multiple constructor in the same class, with different paramenter. This will allow you to create an object in different way.
+            AddClass obj1 = new AddClass(5, 10);               // Calls 2-parameter constructor
+            AddClass obj2 = new AddClass(1, 2, 3);             // Calls 3-parameter constructor
+            AddClass obj3 = new AddClass(1, 2, 3, 4.5);
 
         }
     }
