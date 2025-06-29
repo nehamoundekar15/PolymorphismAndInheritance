@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -45,6 +46,123 @@ namespace PolymorphismAndInheritance
                 return new Complex(c1.real + c2.real, c1.imga + c2.imga);
             }
         }
+
+        class Emp
+        {
+            public virtual void Name()
+            {
+                Console.WriteLine("Emp Name");
+            }
+        }
+        class Manager : Emp
+        {
+            public override void  Name()
+            {
+                Console.WriteLine("Manager Name");
+            }
+        }
+
+        // Inheritance - This is the feature of OOPS. This allow one class(child) to inherite the properties and methods of another class.(derived)
+        // child and derived class concept
+        // Advantages - code reusability, implement polymorphism, organize the proper structure
+        // Types of inheritance - C# supports single, multilevel, hierarchical inheritance
+        // C# does not supports multiple inheritance (one class inheriting from multiple class). But we can achieve this by using interface
+
+
+        // single inheritance - one class inhities the properties and methods from only one class
+
+        class Parent1
+        {
+            public void Disaplay()
+            {
+                Console.WriteLine("This is parent");
+            }
+
+        }
+        class Chiled1: Parent1
+        {
+            public void Disaplay1()
+            {
+                Console.WriteLine("This is child");
+            }
+        }
+
+        // Multilevel inhiritance - This is the inheritance where class is derived from another derived class. 
+        // grandparent -> parent -> child
+
+        class Grandparent
+        {
+            public void Disaplay()
+            {
+                Console.WriteLine("Grandparent");
+            }
+        }
+        class Parent2 : Grandparent
+        {
+            public void Disaplay2()
+            {
+                Console.WriteLine("Parent1");
+            }
+        }
+        class Child2 : Parent2
+        {
+            public void Disaplay3()
+            {
+                Console.WriteLine("Child2");
+            }
+        }
+
+        //Hierarchical inheritance - This is the inheritance where multiple classes are derived from a single class.
+        class Parent3
+        {
+            public void Disaplay()
+            {
+                Console.WriteLine("Parent3");
+            }
+        }
+
+        class Child3 : Parent3
+        {
+            public void Disaplay1()
+            {
+                Console.WriteLine("Child3");
+            }
+        }
+        class child4 : Parent3
+        {
+            public void Disaplay2()
+            {
+                Console.WriteLine("Child4");
+            }
+
+        }
+
+        // multiple inheritance - This is the inheritance where class is derived from multiple classes. C# does not support this directly but we can achieve this by using interface.
+        interface partrInterface
+        {
+            void Display();
+        }
+        interface childInterface : partrInterface
+        {
+            void Display1();
+        }
+        class Child5 : partrInterface, childInterface
+        {
+       
+            public void Display()
+            {
+                Console.WriteLine("Child5 Display");
+            }
+
+            public void Display1()
+            {
+                Console.WriteLine("Child5 Display1");
+            }
+        }
+        
+
+
+
         static void Main(string[] args)
         {
             // Polymorphism - This is one of the concept for OOPS. This means one name many forms
@@ -80,11 +198,47 @@ namespace PolymorphismAndInheritance
             Complex complex1 = new Complex(10, 20);
             Complex complex2 = new Complex(10, 20);
 
-            Complex complex3 = complex1 + complex2; // this will call the operator + method.
+            Complex complex3 = complex1 + complex2; // this will call the operator + method.ch
             Console.WriteLine("complex3 real part = " + complex3.real + " complex3 imaginary part = " + complex3.imga);
 
 
+            // dynamic binding/ polymorphism - Method overriding
+            //Requires virtual method in the base class and override the m=virtual method in the derived class. 
+            // It relates to inheritance 
 
+            Emp emp = new Emp();
+            emp.Name(); // this will call the base class method
+            Emp emp2 = new Manager();
+            emp2.Name(); // this will call the derived class method due to dynamic binding
+
+            //Inheritance 
+            //Single Inheritance
+            Chiled1 chiled1 = new Chiled1();
+            chiled1.Disaplay(); // this will call the parent class method
+            chiled1.Disaplay1(); // this will call the child class method
+
+            Parent1 p = new Chiled1();
+            p.Disaplay(); // this will call the parent calss method , if we want to call child method then use virtual and override keywords
+
+            // Multilevel inhiritance 
+            Child2 child2 = new Child2();
+            child2.Disaplay();
+            child2.Disaplay2();
+            child2.Disaplay3();
+
+            //Hierarchical inheritance
+
+            Child3 child3 = new Child3();
+            child3.Disaplay();
+            child3.Disaplay1();
+            child4 child4 = new child4();
+            child4.Disaplay();
+            child4.Disaplay2();
+
+            // Multiple inheritane
+            Child5 child5 = new Child5();
+            child5.Display(); // this will call the interface method
+            child5.Display1(); // this will call the interface method   
 
         }
     }
